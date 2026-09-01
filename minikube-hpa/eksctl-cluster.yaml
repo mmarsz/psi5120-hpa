@@ -1,0 +1,43 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: psi5120-hpa
+  region: sa-east-1
+  version: "1.34"
+  tags:
+    Project: PSI5120
+    Purpose: HPA-lab
+    Owner: admin-lab
+    AutoCleanup: "required"
+
+iam:
+  withOIDC: true
+
+# Mantém os nós em sub-redes públicas para evitar um NAT Gateway pago neste laboratório temporário.
+vpc:
+  nat:
+    gateway: Disable
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: false
+
+managedNodeGroups:
+  # Nome novo: evita aguardar a exclusão assíncrona da tentativa rejeitada.
+  - name: hpa-lab-free
+    # Confirmado elegível ao Free Tier desta conta; reduz o custo do experimento.
+    instanceType: t3.small
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 1
+    volumeSize: 20
+    privateNetworking: false
+    labels:
+      workload: psi5120-hpa
+    tags:
+      Project: PSI5120
+      Purpose: HPA-lab
+      AutoCleanup: "required"
+
+addons:
+  - name: metrics-server

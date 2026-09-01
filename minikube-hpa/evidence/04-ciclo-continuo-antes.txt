@@ -1,0 +1,4 @@
+Minikube / PSI5120 — ciclo contínuo, antes da carga
+2026-08-31T23:25:07-03:00
+HPA: cpu 1%/50%, 1 réplica; pod web-hpa-5cfbf7675-8vkw5 Running.
+CPU observada: 1m; memória: 13Mi.

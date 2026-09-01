@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: web-hpa-load
+  namespace: psi5120-hpa
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: load
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - |
+              # Vinte clientes concorrentes requisitam trabalho de CPU por cinco minutos.
+              for client in $(seq 1 20); do
+                (
+                  end=$(( $(date +%s) + 300 ))
+                  while [ $(date +%s) -lt "$end" ]; do
+                    wget -q -O /dev/null 'http://web-hpa.psi5120-hpa.svc.cluster.local/?work=75000'
+                  done
+                ) &
+              done
+              wait

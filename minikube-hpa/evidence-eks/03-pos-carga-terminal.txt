@@ -1,0 +1,16 @@
+EKS / PSI5120 — evidência após remover a carga
+2026-08-31T23:02:xx-03:00
+
+$ kubectl -n psi5120-hpa get hpa,pods -o wide
+NAME      REFERENCE            TARGETS     MINPODS   MAXPODS   REPLICAS
+web-hpa   Deployment/web-hpa   cpu: 1%/50%  1         5         5
+
+$ kubectl -n psi5120-hpa top pods
+NAME                       CPU(cores)   MEMORY(bytes)
+web-hpa-7cdbbb54cb-gndkx   1m           16Mi
+web-hpa-7cdbbb54cb-k6xxh   1m           16Mi
+web-hpa-7cdbbb54cb-rsr5f   1m           15Mi
+web-hpa-7cdbbb54cb-x54nb   1m           17Mi
+
+Observação: a carga foi removida; as métricas retornaram a 1%. As 5 réplicas
+permanecem temporariamente devido à janela de estabilização padrão do HPA.

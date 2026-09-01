@@ -1,0 +1,21 @@
+EKS / PSI5120 — evidência durante carga
+2026-08-31T23:01:xx-03:00
+
+$ kubectl -n psi5120-hpa get hpa,pods -o wide
+NAME      REFERENCE            TARGETS       MINPODS   MAXPODS   REPLICAS
+web-hpa   Deployment/web-hpa   cpu: 498%/50%  1         5         4
+
+NAME                           READY   STATUS    AGE
+web-hpa-7cdbbb54cb-gndkx       1/1     Running   37s
+web-hpa-7cdbbb54cb-k6xxh       1/1     Running   22s
+web-hpa-7cdbbb54cb-rsr5f       1/1     Running   22s
+web-hpa-7cdbbb54cb-x54nb       1/1     Running   2m08s
+web-hpa-load-q24lc             1/1     Running   65s
+
+$ kubectl -n psi5120-hpa top pods
+NAME                       CPU(cores)   MEMORY(bytes)
+web-hpa-7cdbbb54cb-gndkx   311m         16Mi
+web-hpa-7cdbbb54cb-k6xxh   75m          13Mi
+web-hpa-7cdbbb54cb-rsr5f   136m         14Mi
+web-hpa-7cdbbb54cb-x54nb   351m         21Mi
+web-hpa-load-q24lc         674m         7Mi

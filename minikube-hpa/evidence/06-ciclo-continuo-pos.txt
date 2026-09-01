@@ -1,0 +1,4 @@
+Minikube / PSI5120 — ciclo contínuo, após remover a carga
+2026-08-31T23:28:47-03:00
+HPA: cpu 1%/50%, 5 réplicas temporárias pela janela de estabilização de descida.
+O Job web-hpa-load já foi removido. Todos os cinco pods mostraram 1m de CPU.

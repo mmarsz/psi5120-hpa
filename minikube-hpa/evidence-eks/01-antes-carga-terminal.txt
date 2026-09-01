@@ -1,0 +1,10 @@
+EKS / PSI5120 — evidência antes da carga
+2026-08-31T23:00:xx-03:00
+
+$ kubectl -n psi5120-hpa top pods
+NAME                       CPU(cores)   MEMORY(bytes)
+web-hpa-7cdbbb54cb-x54nb   1m           13Mi
+
+$ kubectl -n psi5120-hpa get hpa
+NAME      REFERENCE            TARGETS     MINPODS   MAXPODS   REPLICAS
+web-hpa   Deployment/web-hpa   cpu: 1%/50%  1         5         1
